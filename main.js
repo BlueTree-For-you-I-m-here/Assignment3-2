@@ -49,10 +49,8 @@
       const removeTask = (conditionTd_b) => {
          const targetTask = conditionTd_b.closest('tr'); //¥　closest
          addTaskTarget.removeChild(targetTask);
-         targetTask.remove();
+         // targetTask.remove(); //別のremove方法
       };
-
-      // conditionTd_b.addEventListener('click', () => removeTask(conditionTd_b)); //^ 7行目
 
       //削除ボタンクリック時の動作
       conditionTd_b.addEventListener('click', () => {
