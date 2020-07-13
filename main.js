@@ -12,53 +12,62 @@
       let task = {
          id: idNum,
          comment: input.value,
-         condition_a: '作業中',
-         condition_b: '削除',
+         condition_working: '作業中',
+         condition_delete: '削除',
       };
 
       tasks.push(task);
+
+      const conditionWorkingTd = document.createElement('td');
+      const conditionDeleteTd = document.createElement('td');
+
+      // conditionWorkingTd / conditionDeleteTd　にclassを付与
+      conditionWorkingTd.className = 'btn';
+      conditionDeleteTd.className = 'btn';
+
+      //¥ここだと削除ボタンが機能しない、なぜ?---
+      //¥tasks配列の要素のindex番号を取得
+      conditionDeleteTd.addEventListener('click', () => {
+         let each = tasks.forEach((taskEach, index) => {
+            return index;
+         });
+
+         //削除ボタンを押された配列を削除
+         let emptyArray = tasks.splice(each, 1);
+         console.log(tasks);
+         idNum--;
+      });
 
       displayTasks();
 
       console.log(tasks); //¥結果確認用
    };
 
-   //tasks配列の中身を取り出し、表示させる方法がわかりません
    const displayTasks = () => {
       const tr = document.createElement('tr');
       const idTd = document.createElement('td');
       const commentTd = document.createElement('td');
-      const conditionTd_a = document.createElement('td');
-      const conditionTd_b = document.createElement('td');
+      const conditionWorkingTd = document.createElement('td');
+      const conditionDeleteTd = document.createElement('td');
 
-      // conditionTd_a / _b　にclassを付与
-      conditionTd_a.className = 'btn';
-      conditionTd_b.className = 'btn';
+      // conditionWorkingTd / _b　にclassを付与
+      conditionWorkingTd.className = 'btn';
+      conditionDeleteTd.className = 'btn';
+
+      // //¥変更箇所!!! indexを使って指定する??
 
       addTaskTarget.appendChild(tr);
       tr.appendChild(idTd); // 1つめ
       idTd.textContent = tasks[0].id;
       tr.appendChild(commentTd); // 2つ目
       commentTd.textContent = tasks[0].comment; // タスク入力値
-      tr.appendChild(conditionTd_a); // 3つ目
-      conditionTd_a.textContent = tasks[0].condition_a;
-      tr.appendChild(conditionTd_b); // 4つ目
-      conditionTd_b.textContent = tasks[0].condition_b;
+      tr.appendChild(conditionWorkingTd); // 3つ目
+      conditionWorkingTd.textContent = tasks[0].condition_working;
+      tr.appendChild(conditionDeleteTd); // 4つ目
+      conditionDeleteTd.textContent = tasks[0].condition_delete;
 
-      //-削除機能
-      const removeTask = (conditionTd_b) => {
-         const targetTask = conditionTd_b.closest('tr'); //¥　closest
-         addTaskTarget.removeChild(targetTask);
-         // targetTask.remove(); //別のremove方法
-      };
-
-      //削除ボタンクリック時の動作
-      conditionTd_b.addEventListener('click', () => {
-         removeTask(conditionTd_b);
-         idNum--;
-      });
-
-      tasks = [];
+      //tasksの配列の要素を削除し、その後displayTasks()によって配列内の要素を表示する流れになるように実装するため、コメントアウト
+      // tasks = [];
    };
 
    //追加ボタンクリック時にaddTask()を走らせる
