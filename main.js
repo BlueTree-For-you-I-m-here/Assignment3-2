@@ -13,6 +13,10 @@
       let task = {
          id: idNum,
          comment: input.value,
+
+         //-実験
+         // conditionWorking: '作業中',
+         // conditionDelete: '削除',
       };
 
       tasks.push(task);
@@ -35,8 +39,10 @@
          const commentTd = document.createElement('td');
          const conditionWorkingTd = document.createElement('td');
          const conditionDeleteTd = document.createElement('td');
-         conditionWorkingTd.className = 'btn';
-         conditionDeleteTd.className = 'btn';
+         // conditionWorkingTd.className = 'btn';//¥NEW
+         conditionWorkingTd.classList.add('btn'); //¥NEW
+         conditionDeleteTd.classList.add('btn', 'delete'); //¥NEW
+         const getRemoveBtn = document.getElementsByClassName('delete'); //¥NEW
 
          addTaskTarget.appendChild(tr);
          tr.appendChild(idTd); // 1つめ
@@ -50,19 +56,38 @@
          conditionDeleteTd.textContent = '削除';
 
          //¥削除機能:削除ボタンが押された時に押された要素を削除する
-         conditionDeleteTd.addEventListener('click', () => {
-            //どのindexの削除ボタンが押されたかを確認するためそのindexを取得
-            let each = tasks.forEach((taskEach, index) => {
-               return index;
-            });
 
-            //削除ボタンを押された配列を削除
-            tasks.splice(each, 1);
+         // console.log(getRemoveBtn[0]); //¥NEWWWW
+         //¥NEWWWW
+         const numOfTasks = addTaskTarget.childElementCount;
+         const removeElOfArry = () => {
+            for (let i = 0, maxLen = numOfTasks; i < maxLen; i++) {
+               // return;
+            }
+         };
 
-            //配列の要素を削除した後で再表示
-            displayTasks();
-         });
+         removeElOfArry();
+
+         // displayTasks(); //¥ここでも無限ループに入る
+
+         // //!旧コード
+         // conditionDeleteTd.addEventListener('click', () => {
+         //    //どのindexの削除ボタンが押されたかを確認するためそのindexを取得
+         //    let each = tasks.forEach((taskEach, index) => {
+         //       return index;
+         //    });
+         // //!旧コード
+
+         //    // //削除ボタンを押された配列を削除
+         //    // tasks.splice(each, 1);
+
+         //    // //配列の要素を削除した後で再表示
+         //    // displayTasks();
+
+         // });
       });
+
+      console.log(tasks); //!!!!デバック用_要削除!!
    };
 
    //追加ボタンクリック時にaddTask()を走らせる
