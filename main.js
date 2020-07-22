@@ -57,12 +57,17 @@
 
          //¥削除機能:削除ボタンが押された時に押された要素を削除する
 
-         // console.log(getRemoveBtn[0]); //¥NEWWWW
+         console.log(getRemoveBtn[0]); //¥NEWWWW
          //¥NEWWWW
          const numOfTasks = addTaskTarget.childElementCount;
          const removeElOfArry = () => {
             for (let i = 0, maxLen = numOfTasks; i < maxLen; i++) {
-               // return;
+               getRemoveBtn[i].addEventListener('click', () => {
+                  tasks.splice(i, 1);
+                  return;
+               });
+               // displayTasks();//¥これを発動させると無限ループに入る
+               return;
             }
          };
 
@@ -70,13 +75,12 @@
 
          // displayTasks(); //¥ここでも無限ループに入る
 
-         // //!旧コード
+         // //!旧コード~~~~~~~~~~~~~~
          // conditionDeleteTd.addEventListener('click', () => {
          //    //どのindexの削除ボタンが押されたかを確認するためそのindexを取得
          //    let each = tasks.forEach((taskEach, index) => {
          //       return index;
          //    });
-         // //!旧コード
 
          //    // //削除ボタンを押された配列を削除
          //    // tasks.splice(each, 1);
@@ -85,6 +89,7 @@
          //    // displayTasks();
 
          // });
+         // //!旧コード~~~~~~~~~~~~~~~~~
       });
 
       console.log(tasks); //!!!!デバック用_要削除!!
